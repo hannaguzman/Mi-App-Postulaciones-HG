@@ -21,7 +21,7 @@ body[data-theme='rose'] {
   --primary-dark: #b73c72;
   --border: #f4d7e3;
   --shadow: 0 16px 40px rgba(138, 55, 94, 0.12);
-  --offer: #e76ab2;
+  --offer: #3bb17c;
 }
 
 body[data-theme='violet'] {
@@ -31,7 +31,7 @@ body[data-theme='violet'] {
   --primary-dark: #5d43d5;
   --border: #ddd2ff;
   --shadow: 0 16px 40px rgba(79, 63, 158, 0.12);
-  --offer: #8c6af7;
+  --offer: #2ea66d;
 }
 
 body[data-theme='gold'] {
@@ -41,7 +41,7 @@ body[data-theme='gold'] {
   --primary-dark: #b08208;
   --border: #f1dfab;
   --shadow: 0 16px 40px rgba(156, 116, 15, 0.12);
-  --offer: #e1b437;
+  --offer: #2ea66d;
 }
 
 body[data-theme='green'] {
@@ -51,7 +51,7 @@ body[data-theme='green'] {
   --primary-dark: #1d7d53;
   --border: #d4eadb;
   --shadow: 0 16px 40px rgba(31, 115, 75, 0.12);
-  --offer: #4ca76f;
+  --offer: #2ea66d;
 }
 
 * {
@@ -339,23 +339,23 @@ textarea {
 }
 
 .status-badge[data-status="Enviado"] {
-  background: rgba(29, 185, 123, 0.12);
-  color: var(--success);
+  background: rgba(107, 114, 128, 0.12);
+  color: #4b5563;
 }
 
 .status-badge[data-status="En proceso"] {
-  background: rgba(209, 125, 10, 0.12);
-  color: var(--warning);
+  background: rgba(245, 158, 11, 0.14);
+  color: #b45309;
 }
 
 .status-badge[data-status="Rechazado"] {
-  background: rgba(217, 83, 79, 0.12);
-  color: var(--danger);
+  background: rgba(220, 38, 38, 0.12);
+  color: #b91c1c;
 }
 
 .status-badge[data-status="Oferta"] {
-  background: rgba(61, 130, 246, 0.12);
-  color: var(--offer);
+  background: rgba(22, 163, 74, 0.12);
+  color: #15803d;
 }
 
 .meta {
