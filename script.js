@@ -195,6 +195,8 @@ async function handleLogin(event) {
 }
 
 function handleLogout() {
+  setUserMenu(false);
+  setDrawer(false);
   prefsLocked = true;
   setCurrentUser('');
   clearChosenFile();
@@ -976,6 +978,54 @@ themeButtons.forEach((button) => {
   button.addEventListener('click', () => {
     applyTheme(button.dataset.theme);
   });
+});
+
+/* ======================= Menús (panel lateral y usuario) ======================= */
+
+const menuButton = document.getElementById('menu-button');
+const drawer = document.getElementById('side-drawer');
+const drawerOverlay = document.getElementById('drawer-overlay');
+const drawerClose = document.getElementById('drawer-close');
+const userMenu = document.getElementById('user-menu');
+const userButton = document.getElementById('user-button');
+const userDropdown = document.getElementById('user-dropdown');
+
+function setDrawer(open) {
+  drawer.classList.toggle('open', open);
+  drawerOverlay.classList.toggle('open', open);
+  drawer.setAttribute('aria-hidden', String(!open));
+  menuButton.setAttribute('aria-expanded', String(open));
+}
+
+function setUserMenu(open) {
+  userDropdown.hidden = !open;
+  userButton.setAttribute('aria-expanded', String(open));
+}
+
+menuButton.addEventListener('click', () => {
+  setUserMenu(false);
+  setDrawer(!drawer.classList.contains('open'));
+});
+
+drawerClose.addEventListener('click', () => setDrawer(false));
+drawerOverlay.addEventListener('click', () => setDrawer(false));
+
+userButton.addEventListener('click', () => {
+  setDrawer(false);
+  setUserMenu(userDropdown.hidden);
+});
+
+document.addEventListener('click', (event) => {
+  if (!userMenu.contains(event.target)) {
+    setUserMenu(false);
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    setUserMenu(false);
+    setDrawer(false);
+  }
 });
 
 /* ======================= Inicio ======================= */
