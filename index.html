@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi App de Postulaciones</title>
+    <meta
+      name="description"
+      content="Aplicación para llevar el registro de postulaciones laborales."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Seguimiento laboral</p>
+          <h1>Postulaciones</h1>
+        </div>
+        <span class="badge" id="total-applications">0</span>
+      </header>
+
+      <main class="layout">
+        <section class="panel form-panel">
+          <h2>Nueva postulación</h2>
+
+          <form id="application-form">
+            <div class="field-group">
+              <label for="company">Empresa</label>
+              <input
+                id="company"
+                name="company"
+                type="text"
+                placeholder="Ej: Mercado Libre"
+                required
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="role">Rol</label>
+              <input
+                id="role"
+                name="role"
+                type="text"
+                placeholder="Ej: Frontend Developer"
+                required
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="date">Fecha</label>
+              <input id="date" name="date" type="date" required />
+            </div>
+
+            <div class="field-group">
+              <label for="status">Estado</label>
+              <select id="status" name="status">
+                <option value="Enviado">Enviado</option>
+                <option value="En proceso">En proceso</option>
+                <option value="Rechazado">Rechazado</option>
+                <option value="Oferta">Oferta</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="notes">Notas de seguimiento</label>
+              <textarea
+                id="notes"
+                name="notes"
+                rows="4"
+                placeholder="Ej: Contacté con recruiter, pendiente entrevista..."
+              ></textarea>
+            </div>
+
+            <button type="submit" class="primary-button">Guardar postulación</button>
+          </form>
+        </section>
+
+        <section class="panel list-panel">
+          <div class="section-header">
+            <h2>Listado</h2>
+          </div>
+
+          <div id="empty-state" class="empty-state" hidden>
+            <p>No hay postulaciones cargadas todavía.</p>
+            <span>Agrega la primera para empezar a organizar tu búsqueda laboral.</span>
+          </div>
+
+          <ul id="applications-list" class="applications-list" aria-live="polite"></ul>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
