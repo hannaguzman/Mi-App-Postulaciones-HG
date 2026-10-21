@@ -17,13 +17,81 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- Pantalla de acceso: crear cuenta / iniciar sesión -->
+    <div id="auth-screen" class="auth-screen" hidden>
+      <div class="auth-card">
+        <div class="auth-brand">
+          <span class="auth-logo">💼</span>
+          <h2 id="auth-title">Crea tu cuenta</h2>
+          <p id="auth-subtitle">Guarda y organiza tus postulaciones en un solo lugar.</p>
+        </div>
+
+        <div class="auth-tabs" role="tablist">
+          <button type="button" class="auth-tab active" data-auth-tab="register" role="tab" aria-selected="true">
+            Crear cuenta
+          </button>
+          <button type="button" class="auth-tab" data-auth-tab="login" role="tab" aria-selected="false">
+            Iniciar sesión
+          </button>
+        </div>
+
+        <form id="register-form" class="auth-form" novalidate>
+          <div class="field-group compact">
+            <label for="register-name">Nombre</label>
+            <input id="register-name" type="text" placeholder="Ej: Ana Pérez" autocomplete="name" required />
+          </div>
+          <div class="field-group compact">
+            <label for="register-email">Email</label>
+            <input id="register-email" type="email" placeholder="ana@correo.com" autocomplete="email" required />
+          </div>
+          <div class="field-group compact">
+            <label for="register-password">Contraseña</label>
+            <input id="register-password" type="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password" required />
+          </div>
+          <div class="field-group compact">
+            <label for="register-password2">Repetir contraseña</label>
+            <input id="register-password2" type="password" placeholder="Repite tu contraseña" autocomplete="new-password" required />
+          </div>
+          <p class="auth-error" id="register-error" role="alert" hidden></p>
+          <button type="submit" class="primary-button">Crear cuenta</button>
+        </form>
+
+        <form id="login-form" class="auth-form hidden" novalidate>
+          <div class="field-group compact">
+            <label for="login-email">Email</label>
+            <input id="login-email" type="email" placeholder="ana@correo.com" autocomplete="email" required />
+          </div>
+          <div class="field-group compact">
+            <label for="login-password">Contraseña</label>
+            <input id="login-password" type="password" placeholder="Tu contraseña" autocomplete="current-password" required />
+          </div>
+          <p class="auth-error" id="login-error" role="alert" hidden></p>
+          <button type="submit" class="primary-button">Entrar</button>
+        </form>
+
+        <p class="auth-note">Tu cuenta y tus datos se guardan solo en este navegador.</p>
+      </div>
+    </div>
+
     <div class="app-shell">
       <header class="topbar">
         <div>
           <p class="eyebrow">Seguimiento laboral</p>
           <h1>Postulaciones</h1>
         </div>
-        <span class="badge" id="total-applications">0</span>
+        <div class="topbar-actions">
+          <button
+            id="mode-toggle"
+            class="mode-toggle"
+            type="button"
+            aria-label="Cambiar a modo oscuro"
+            title="Cambiar modo claro/oscuro"
+          >
+            <span class="mode-icon" aria-hidden="true">🌙</span>
+            <span class="mode-text">Oscuro</span>
+          </button>
+          <span class="badge" id="total-applications">0</span>
+        </div>
       </header>
 
       <main class="layout">
@@ -58,20 +126,15 @@
 
           <div class="account-box">
             <h3>Cuenta</h3>
-            <div id="current-user-box" class="current-user-box hidden">
+            <div id="current-user-box" class="current-user-box">
               <span class="user-icon">👤</span>
-              <strong id="current-user-name">Usuario</strong>
+              <div class="user-info">
+                <strong id="current-user-name">Usuario</strong>
+                <small id="current-user-email"></small>
+              </div>
             </div>
 
-            <form id="login-form" class="login-form">
-              <div class="field-group compact">
-                <label for="user-name">Nombre / email</label>
-                <input id="user-name" name="user-name" type="text" placeholder="Ej: ana@correo.com" required />
-              </div>
-              <button type="submit" class="secondary-button">Entrar</button>
-            </form>
-
-            <button id="logout-button" type="button" class="ghost-button hidden">Cerrar sesión</button>
+            <button id="logout-button" type="button" class="ghost-button">Cerrar sesión</button>
           </div>
         </aside>
 
@@ -133,8 +196,39 @@
               </div>
 
               <div class="field-group">
-                <label for="cv">Adjuntar CV o archivo</label>
-                <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" />
+                <span class="field-label" id="cv-label">Adjuntar CV o archivo</span>
+                <div class="file-drop" id="file-drop">
+                  <input
+                    id="cv"
+                    name="cv"
+                    type="file"
+                    class="file-input"
+                    accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                    aria-labelledby="cv-label"
+                  />
+                  <label for="cv" class="file-drop-area" id="file-drop-area">
+                    <span class="file-drop-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
+                      </svg>
+                    </span>
+                    <span class="file-drop-text">
+                      <strong>Haz clic para subir</strong> o arrastra tu archivo aquí
+                    </span>
+                    <span class="file-drop-hint">PDF, DOC, DOCX, PNG o JPG</span>
+                  </label>
+
+                  <div class="file-chosen hidden" id="file-chosen">
+                    <span class="file-chosen-icon" aria-hidden="true">📄</span>
+                    <div class="file-chosen-info">
+                      <strong id="file-chosen-name">archivo.pdf</strong>
+                      <small id="file-chosen-size"></small>
+                    </div>
+                    <button type="button" class="file-remove" id="file-remove" aria-label="Quitar archivo">✕</button>
+                  </div>
+                </div>
               </div>
 
               <button type="submit" class="primary-button">Guardar postulación</button>
@@ -177,6 +271,124 @@
         </div>
       </main>
     </div>
+
+    <!-- Ventana: importar desde LinkedIn -->
+    <dialog id="linkedin-dialog" class="modal" aria-labelledby="linkedin-title">
+      <form id="linkedin-form" class="modal-card">
+        <header class="modal-header">
+          <span class="modal-badge modal-badge-linkedin" aria-hidden="true">in</span>
+          <div class="modal-heading">
+            <h3 id="linkedin-title">Importar desde LinkedIn</h3>
+            <p>Pega el enlace o el texto del anuncio y completamos la empresa y el rol por ti.</p>
+          </div>
+          <button type="button" class="modal-close" data-close aria-label="Cerrar">✕</button>
+        </header>
+
+        <div class="field-group compact">
+          <div class="label-row">
+            <label for="linkedin-text">Enlace o texto del anuncio</label>
+            <button type="button" class="link-button" id="linkedin-paste">📋 Pegar</button>
+          </div>
+          <textarea
+            id="linkedin-text"
+            rows="5"
+            placeholder="Ej: https://www.linkedin.com/jobs/view/frontend-developer-at-globant-123456789&#10;o copia y pega el título y la empresa del anuncio"
+          ></textarea>
+        </div>
+
+        <div class="detected-box">
+          <p class="detected-title">Detectado <span id="linkedin-status" class="detected-status">Esperando datos…</span></p>
+          <div class="detected-grid">
+            <div class="field-group compact">
+              <label for="linkedin-company">Empresa</label>
+              <input id="linkedin-company" type="text" placeholder="Empresa" />
+            </div>
+            <div class="field-group compact">
+              <label for="linkedin-role">Rol</label>
+              <input id="linkedin-role" type="text" placeholder="Rol" />
+            </div>
+          </div>
+          <p class="modal-hint">Puedes corregir los datos antes de usarlos.</p>
+        </div>
+
+        <footer class="modal-actions">
+          <button type="button" class="secondary-button" data-close>Cancelar</button>
+          <button type="submit" class="primary-button" id="linkedin-confirm" disabled>Usar en el formulario</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <!-- Ventana: editar postulación -->
+    <dialog id="edit-dialog" class="modal" aria-labelledby="edit-title">
+      <form id="edit-form" class="modal-card">
+        <header class="modal-header">
+          <span class="modal-badge" aria-hidden="true">✏️</span>
+          <div class="modal-heading">
+            <h3 id="edit-title">Editar postulación</h3>
+            <p>Actualiza los datos y guarda los cambios.</p>
+          </div>
+          <button type="button" class="modal-close" data-close aria-label="Cerrar">✕</button>
+        </header>
+
+        <div class="modal-grid">
+          <div class="field-group compact">
+            <label for="edit-company">Empresa</label>
+            <input id="edit-company" type="text" required />
+          </div>
+          <div class="field-group compact">
+            <label for="edit-role">Rol</label>
+            <input id="edit-role" type="text" required />
+          </div>
+          <div class="field-group compact">
+            <label for="edit-date">Fecha</label>
+            <input id="edit-date" type="date" required />
+          </div>
+          <div class="field-group compact">
+            <label for="edit-status">Estado</label>
+            <select id="edit-status">
+              <option value="Enviado">Enviado</option>
+              <option value="En proceso">En proceso</option>
+              <option value="Rechazado">Rechazado</option>
+              <option value="Oferta">Oferta</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-group compact">
+          <label for="edit-reminder">Recordatorio</label>
+          <input id="edit-reminder" type="datetime-local" />
+        </div>
+
+        <div class="field-group compact">
+          <label for="edit-notes">Notas de seguimiento</label>
+          <textarea id="edit-notes" rows="4"></textarea>
+        </div>
+
+        <footer class="modal-actions">
+          <button type="button" class="secondary-button" data-close>Cancelar</button>
+          <button type="submit" class="primary-button">Guardar cambios</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <!-- Ventana: confirmar -->
+    <dialog id="confirm-dialog" class="modal modal-small" aria-labelledby="confirm-title">
+      <form method="dialog" class="modal-card">
+        <header class="modal-header">
+          <span class="modal-badge modal-badge-danger" aria-hidden="true">🗑️</span>
+          <div class="modal-heading">
+            <h3 id="confirm-title">Confirmar</h3>
+            <p id="confirm-message"></p>
+          </div>
+        </header>
+        <footer class="modal-actions">
+          <button type="submit" value="cancel" class="secondary-button">Cancelar</button>
+          <button type="submit" value="ok" class="primary-button danger" id="confirm-ok">Eliminar</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
     <script src="script.js"></script>
   </body>
