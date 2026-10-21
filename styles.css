@@ -102,6 +102,7 @@ textarea {
 
 h1,
 h2,
+h3,
 p {
   margin-top: 0;
 }
@@ -114,6 +115,11 @@ h1 {
 h2 {
   margin-bottom: 18px;
   font-size: 1.35rem;
+}
+
+h3 {
+  margin-bottom: 10px;
+  font-size: 1.05rem;
 }
 
 .badge {
@@ -216,18 +222,43 @@ h2 {
   background: #2e9f6d;
 }
 
-.form-panel {
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 18px 0 10px;
 }
 
-#application-form {
+.account-box {
   display: grid;
-  gap: 18px;
+  gap: 12px;
+}
+
+.current-user-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(45, 108, 223, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.user-icon {
+  font-size: 1.1rem;
+}
+
+.login-form {
+  display: grid;
+  gap: 12px;
 }
 
 .field-group {
   display: grid;
   gap: 8px;
+}
+
+.compact {
+  gap: 6px;
 }
 
 label {
@@ -260,24 +291,68 @@ textarea {
   min-height: 100px;
 }
 
+.primary-button,
+.secondary-button,
+.ghost-button {
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
 .primary-button {
   border: none;
-  border-radius: 12px;
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color: #fff;
-  font-weight: 700;
   padding: 14px 18px;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 12px 24px rgba(45, 108, 223, 0.25);
 }
 
-.primary-button:hover {
+.secondary-button {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  padding: 10px 12px;
+}
+
+.ghost-button {
+  border: 1px solid rgba(217, 83, 79, 0.2);
+  background: rgba(217, 83, 79, 0.04);
+  color: var(--danger);
+  padding: 10px 12px;
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.ghost-button:hover {
   transform: translateY(-1px);
+}
+
+.small-button {
+  white-space: nowrap;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.form-panel {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+}
+
+#application-form {
+  display: grid;
+  gap: 18px;
 }
 
 .section-header {
   margin-bottom: 10px;
+}
+
+.toolbar-row {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .empty-state {
@@ -380,6 +455,25 @@ textarea {
   padding: 12px;
 }
 
+.attachment-link {
+  display: inline-block;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.reminder-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  background: rgba(45, 108, 223, 0.08);
+  color: var(--primary);
+  padding: 6px 10px;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
 .item-actions {
   display: flex;
   align-items: center;
@@ -403,14 +497,30 @@ textarea {
   padding: 10px 12px;
 }
 
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.action-button,
 .delete-button {
-  border: 1px solid rgba(217, 83, 79, 0.2);
-  background: rgba(217, 83, 79, 0.04);
-  color: var(--danger);
   border-radius: 10px;
   padding: 10px 12px;
   cursor: pointer;
   font-weight: 600;
+}
+
+.action-button {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+}
+
+.delete-button {
+  border: 1px solid rgba(217, 83, 79, 0.2);
+  background: rgba(217, 83, 79, 0.04);
+  color: var(--danger);
 }
 
 @media (min-width: 768px) {
@@ -421,6 +531,11 @@ textarea {
   .layout {
     grid-template-columns: 220px minmax(0, 1fr);
     align-items: start;
+  }
+
+  .toolbar-row {
+    grid-template-columns: minmax(0, 2fr) 180px auto;
+    align-items: center;
   }
 
   .application-item {

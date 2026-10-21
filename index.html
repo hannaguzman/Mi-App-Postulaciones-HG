@@ -53,6 +53,26 @@
               Verde
             </button>
           </div>
+
+          <div class="divider"></div>
+
+          <div class="account-box">
+            <h3>Cuenta</h3>
+            <div id="current-user-box" class="current-user-box hidden">
+              <span class="user-icon">👤</span>
+              <strong id="current-user-name">Usuario</strong>
+            </div>
+
+            <form id="login-form" class="login-form">
+              <div class="field-group compact">
+                <label for="user-name">Nombre / email</label>
+                <input id="user-name" name="user-name" type="text" placeholder="Ej: ana@correo.com" required />
+              </div>
+              <button type="submit" class="secondary-button">Entrar</button>
+            </form>
+
+            <button id="logout-button" type="button" class="ghost-button hidden">Cerrar sesión</button>
+          </div>
         </aside>
 
         <div class="content-stack">
@@ -98,6 +118,11 @@
               </div>
 
               <div class="field-group">
+                <label for="reminder">Recordatorio</label>
+                <input id="reminder" name="reminder" type="datetime-local" />
+              </div>
+
+              <div class="field-group">
                 <label for="notes">Notas de seguimiento</label>
                 <textarea
                   id="notes"
@@ -107,6 +132,11 @@
                 ></textarea>
               </div>
 
+              <div class="field-group">
+                <label for="cv">Adjuntar CV o archivo</label>
+                <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" />
+              </div>
+
               <button type="submit" class="primary-button">Guardar postulación</button>
             </form>
           </section>
@@ -114,6 +144,27 @@
           <section class="panel list-panel">
             <div class="section-header">
               <h2>Listado</h2>
+            </div>
+
+            <div class="toolbar-row">
+              <input
+                id="search-input"
+                type="search"
+                placeholder="Buscar empresa o rol..."
+                aria-label="Buscar postulaciones"
+              />
+
+              <select id="status-filter" aria-label="Filtrar por estado">
+                <option value="all">Todos</option>
+                <option value="Enviado">Enviado</option>
+                <option value="En proceso">En proceso</option>
+                <option value="Rechazado">Rechazado</option>
+                <option value="Oferta">Oferta</option>
+              </select>
+
+              <button id="linkedin-import-button" type="button" class="secondary-button small-button">
+                Importar LinkedIn
+              </button>
             </div>
 
             <div id="empty-state" class="empty-state" hidden>
