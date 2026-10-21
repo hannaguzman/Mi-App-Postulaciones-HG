@@ -1,4 +1,5 @@
 const STORAGE_KEY = 'postulaciones-hg';
+const THEME_STORAGE_KEY = 'postulaciones-hg-theme';
 
 const initialApplications = [
   {
@@ -23,6 +24,7 @@ const form = document.getElementById('application-form');
 const applicationsList = document.getElementById('applications-list');
 const emptyState = document.getElementById('empty-state');
 const totalApplications = document.getElementById('total-applications');
+const themeButtons = document.querySelectorAll('.theme-option');
 
 function getApplications() {
   const stored = localStorage.getItem(STORAGE_KEY);
@@ -59,6 +61,23 @@ function formatDate(dateString) {
     month: '2-digit',
     year: 'numeric'
   }).format(date);
+}
+
+function applyTheme(theme) {
+  document.body.dataset.theme = theme;
+
+  themeButtons.forEach((button) => {
+    const isActive = button.dataset.theme === theme;
+    button.classList.toggle('active', isActive);
+    button.setAttribute('aria-pressed', String(isActive));
+  });
+
+  localStorage.setItem(THEME_STORAGE_KEY, theme);
+}
+
+function initializeTheme() {
+  const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || 'blue';
+  applyTheme(savedTheme);
 }
 
 function renderApplications() {
@@ -187,5 +206,11 @@ applicationsList.addEventListener('click', (event) => {
   renderApplications();
 });
 
-renderApplications();
+themeButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    applyTheme(button.dataset.theme);
+  });
+});
 
+initializeTheme();
+renderApplications();

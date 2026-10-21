@@ -27,73 +27,103 @@
       </header>
 
       <main class="layout">
-        <section class="panel form-panel">
-          <h2>Nueva postulación</h2>
+        <aside class="panel theme-panel">
+          <h2>Personalizar</h2>
+          <p class="theme-label">Color del sitio</p>
 
-          <form id="application-form">
-            <div class="field-group">
-              <label for="company">Empresa</label>
-              <input
-                id="company"
-                name="company"
-                type="text"
-                placeholder="Ej: Mercado Libre"
-                required
-              />
-            </div>
-
-            <div class="field-group">
-              <label for="role">Rol</label>
-              <input
-                id="role"
-                name="role"
-                type="text"
-                placeholder="Ej: Frontend Developer"
-                required
-              />
-            </div>
-
-            <div class="field-group">
-              <label for="date">Fecha</label>
-              <input id="date" name="date" type="date" required />
-            </div>
-
-            <div class="field-group">
-              <label for="status">Estado</label>
-              <select id="status" name="status">
-                <option value="Enviado">Enviado</option>
-                <option value="En proceso">En proceso</option>
-                <option value="Rechazado">Rechazado</option>
-                <option value="Oferta">Oferta</option>
-              </select>
-            </div>
-
-            <div class="field-group">
-              <label for="notes">Notas de seguimiento</label>
-              <textarea
-                id="notes"
-                name="notes"
-                rows="4"
-                placeholder="Ej: Contacté con recruiter, pendiente entrevista..."
-              ></textarea>
-            </div>
-
-            <button type="submit" class="primary-button">Guardar postulación</button>
-          </form>
-        </section>
-
-        <section class="panel list-panel">
-          <div class="section-header">
-            <h2>Listado</h2>
+          <div class="theme-options" aria-label="Seleccionar color del sitio">
+            <button class="theme-option active" type="button" data-theme="blue" aria-pressed="true">
+              <span class="swatch swatch-blue"></span>
+              Azul
+            </button>
+            <button class="theme-option" type="button" data-theme="rose" aria-pressed="false">
+              <span class="swatch swatch-rose"></span>
+              Rosado
+            </button>
+            <button class="theme-option" type="button" data-theme="violet" aria-pressed="false">
+              <span class="swatch swatch-violet"></span>
+              Violeta
+            </button>
+            <button class="theme-option" type="button" data-theme="gold" aria-pressed="false">
+              <span class="swatch swatch-gold"></span>
+              Amarillo
+            </button>
+            <button class="theme-option" type="button" data-theme="green" aria-pressed="false">
+              <span class="swatch swatch-green"></span>
+              Verde
+            </button>
           </div>
+        </aside>
 
-          <div id="empty-state" class="empty-state" hidden>
-            <p>No hay postulaciones cargadas todavía.</p>
-            <span>Agrega la primera para empezar a organizar tu búsqueda laboral.</span>
-          </div>
+        <div class="content-stack">
+          <section class="panel form-panel">
+            <h2>Nueva postulación</h2>
 
-          <ul id="applications-list" class="applications-list" aria-live="polite"></ul>
-        </section>
+            <form id="application-form">
+              <div class="field-group">
+                <label for="company">Empresa</label>
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  placeholder="Ej: Mercado Libre"
+                  required
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="role">Rol</label>
+                <input
+                  id="role"
+                  name="role"
+                  type="text"
+                  placeholder="Ej: Frontend Developer"
+                  required
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="date">Fecha</label>
+                <input id="date" name="date" type="date" required />
+              </div>
+
+              <div class="field-group">
+                <label for="status">Estado</label>
+                <select id="status" name="status">
+                  <option value="Enviado">Enviado</option>
+                  <option value="En proceso">En proceso</option>
+                  <option value="Rechazado">Rechazado</option>
+                  <option value="Oferta">Oferta</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="notes">Notas de seguimiento</label>
+                <textarea
+                  id="notes"
+                  name="notes"
+                  rows="4"
+                  placeholder="Ej: Contacté con recruiter, pendiente entrevista..."
+                ></textarea>
+              </div>
+
+              <button type="submit" class="primary-button">Guardar postulación</button>
+            </form>
+          </section>
+
+          <section class="panel list-panel">
+            <div class="section-header">
+              <h2>Listado</h2>
+            </div>
+
+            <div id="empty-state" class="empty-state" hidden>
+              <p>No hay postulaciones cargadas todavía.</p>
+              <span>Agrega la primera para empezar a organizar tu búsqueda laboral.</span>
+            </div>
+
+            <ul id="applications-list" class="applications-list" aria-live="polite"></ul>
+          </section>
+        </div>
       </main>
     </div>
 
