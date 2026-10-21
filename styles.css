@@ -847,8 +847,8 @@ body[data-mode='dark'] .status-badge[data-status="Oferta"] {
   }
 
   .layout {
-    grid-template-columns: 220px minmax(0, 1fr);
-    align-items: start;
+    max-width: 960px;
+    margin: 0 auto;
   }
 
   .toolbar-row {
@@ -1132,4 +1132,177 @@ body[data-mode='dark'] .detected-status.found {
   .modal-actions {
     flex-direction: column-reverse;
   }
+}
+
+
+/* ============ Cursor de lápiz ============ */
+:root {
+  --pencil: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 21l1.5-5L15.5 5a2.1 2.1 0 0 1 3 0l.5.5a2.1 2.1 0 0 1 0 3L8 19.5 3 21z' stroke='white' stroke-width='4.2'/%3E%3Cpath d='M3 21l1.5-5L15.5 5a2.1 2.1 0 0 1 3 0l.5.5a2.1 2.1 0 0 1 0 3L8 19.5 3 21z' stroke='%231d2a39' stroke-width='1.8'/%3E%3Cpath d='M13.5 7l3.5 3.5' stroke='%231d2a39' stroke-width='1.8'/%3E%3C/svg%3E") 3 21, auto;
+}
+
+html,
+body {
+  cursor: var(--pencil);
+}
+
+button,
+a,
+label,
+select,
+summary,
+[role='button'],
+.file-drop-area,
+.modal-close,
+.theme-option {
+  cursor: var(--pencil) !important;
+}
+
+button:disabled {
+  cursor: not-allowed !important;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='search'],
+textarea {
+  cursor: text;
+}
+
+/* ============ Barra superior: menú y usuario ============ */
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.icon-button {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--panel);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.icon-button:hover {
+  transform: translateY(-1px);
+  border-color: var(--primary);
+}
+
+.icon-button:focus-visible,
+.avatar-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+.avatar-button {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--primary) 35%, transparent);
+  transition: transform 0.2s ease;
+}
+
+.avatar-button:hover {
+  transform: translateY(-1px) scale(1.04);
+}
+
+.user-menu {
+  position: relative;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 60;
+  display: grid;
+  gap: 12px;
+  width: 260px;
+  max-width: calc(100vw - 32px);
+  padding: 14px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+  animation: modal-in 0.18s ease both;
+}
+
+.user-dropdown[hidden] {
+  display: none;
+}
+
+/* ============ Panel lateral (tres rayitas) ============ */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(8, 12, 20, 0.5);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.drawer-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.side-drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 90;
+  width: min(320px, 86vw);
+  padding: 22px 20px;
+  overflow-y: auto;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform 0.28s ease, visibility 0s linear 0.28s;
+}
+
+.side-drawer.open {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform 0.28s ease, visibility 0s;
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.drawer-header h2 {
+  margin: 0;
+}
+
+.side-drawer .mode-toggle {
+  width: 100%;
+  justify-content: flex-start;
+  padding: 12px 14px;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.side-drawer .mode-text {
+  display: inline;
 }
